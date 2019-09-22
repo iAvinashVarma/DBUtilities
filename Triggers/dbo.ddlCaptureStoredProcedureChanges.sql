@@ -1,4 +1,10 @@
-CREATE TRIGGER ddlCaptureStoredProcedureChanges
+IF EXISTS (SELECT 1 FROM sys.triggers WHERE Name = N'ddlCaptureStoredProcedureChanges')
+BEGIN
+	DROP TRIGGER ddlCaptureStoredProcedureChanges ON DATABASE
+END
+GO
+
+CREATE TRIGGER [ddlCaptureStoredProcedureChanges]
     ON DATABASE
     FOR CREATE_PROCEDURE, ALTER_PROCEDURE, DROP_PROCEDURE
 AS
